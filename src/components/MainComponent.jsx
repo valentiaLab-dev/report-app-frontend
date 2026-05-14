@@ -9,27 +9,27 @@ export default function MainComponent () {
   const [position, setPosition] = useState({ latitude: null, longitude: null });
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if(!$current_lat.get() && !$current_lng.get()) {
-      console.log("no current latlng, fetching geolocation...");
-      if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          setPosition({
-            latitude: pos.coords.latitude,
-            longitude: pos.coords.longitude,
-          });
-        },
-        (err) => {
-          setError(err.message);
-        }
-      );
-    } else {
-      setError("Geolocation is not supported by your browser");
-    }
-    }
+  // useEffect(() => {
+  //   if(!$current_lat.get() && !$current_lng.get()) {
+  //     console.log("no current latlng, fetching geolocation...");
+  //     if ("geolocation" in navigator) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (pos) => {
+  //         setPosition({
+  //           latitude: pos.coords.latitude,
+  //           longitude: pos.coords.longitude,
+  //         });
+  //       },
+  //       (err) => {
+  //         setError(err.message);
+  //       }
+  //     );
+  //   } else {
+  //     setError("Geolocation is not supported by your browser");
+  //   }
+  //   }
     
-  }, []);
+  // }, []);
 
   useEffect(() => {
     console.log("position updated, setting current latlng in store...");

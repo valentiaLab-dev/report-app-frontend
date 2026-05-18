@@ -24,7 +24,7 @@ export const server = {
         if (response.ok) {
             console.log("Login successful!");
           // set cookie or token for authentication
-          return { success: true, token: data.token };
+          return { success: true, token: data.token, username: data.username };
         } else {
           return { success: false, error: data.error };
         }

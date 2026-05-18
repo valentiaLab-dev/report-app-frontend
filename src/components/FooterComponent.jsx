@@ -1,11 +1,11 @@
 import { useStore } from '@nanostores/react';
-import { authState } from '../mainStore';
+import { persistentAuthState } from '../mainStore';
 
 export default function FooterComponent ({ path }) {
-  const $authState = useStore(authState); 
+  const $persistentAuthState = useStore(persistentAuthState); 
   console.log("FooterComponent rendered with path:", path);
-  console.log("User logged in:", ($authState.isLoggedIn ? "Yes" : "No"));
-  const hideLoginLink = path === "/login" || ($authState.isLoggedIn && path === "/dashboard");
+  console.log("User logged in:", ($persistentAuthState.isLoggedIn ? "Yes" : "No"));
+  const hideLoginLink = path === "/login" || ($persistentAuthState.isLoggedIn && path === "/dashboard");
   
   return (
   <> 

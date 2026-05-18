@@ -1,7 +1,7 @@
 import { useActionState, useEffect, startTransition} from 'react';
 import { withState} from '@astrojs/react/actions';
 import { actions } from 'astro:actions';
-import { authState } from '../mainStore';
+import { persistentAuthState } from '../mainStore';
 import { navigate } from "astro:transitions/client";
 import { useStore } from '@nanostores/react';
 
@@ -11,15 +11,14 @@ export default function AstroLoginFormJS() {
     {   success: null, token: null, error: null }
   );
 
-  const $authState = useStore(authState);
+  const $persistentAuthState = useStore(persistentAuthState);
   
 
   useEffect(() => {
-    console.log('Login result:', result);
-    authState.set({
-      isLoggedIn: result?.data?.success || false,
-      token: result?.data?.token || null,
-    });
+    console.log('Login result:', $persistentAuthState );
+    persistentAuthState.setKey('isLoggedIn', result?.data?.success || false);
+    persistentAuthState.setKey('token', result?.data?.token || null);
+    persistentAuthState.setKey('username', result?.data?.username || null);
 
     if(result?.data?.success) {
       navigate('/dashboard');
